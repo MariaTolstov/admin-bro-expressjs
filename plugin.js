@@ -125,7 +125,7 @@ const buildAuthenticatedRouter = (admin, auth, predefinedRouter) => {
     name: auth.cookieName || 'adminbro',
     cookie: {
       secure: true,
-      maxAge: 6000
+      maxAge: 3600000
     }
   }))
   router.use(bodyParser.json())
