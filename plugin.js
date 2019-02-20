@@ -1,5 +1,6 @@
 const express = require('express')
 const AdminBro = require('admin-bro')
+const MemoryStore = require('memorystore')
 
 const path = require('path')
 const bodyParser = require('body-parser')
@@ -121,6 +122,9 @@ const buildAuthenticatedRouter = (admin, auth, predefinedRouter) => {
   const router = predefinedRouter || express.Router()
   router.use(cookieParser())
   router.use(session({
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
     secret: auth.cookiePassword,
     name: auth.cookieName || 'adminbro',
     cookie: {
