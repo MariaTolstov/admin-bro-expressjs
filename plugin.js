@@ -123,6 +123,10 @@ const buildAuthenticatedRouter = (admin, auth, predefinedRouter) => {
   router.use(session({
     secret: auth.cookiePassword,
     name: auth.cookieName || 'adminbro',
+    cookie: {
+      secure: true,
+      maxAge: 6000
+    }
   }))
   router.use(bodyParser.json())
   router.use(bodyParser.urlencoded({ extended: true }))
